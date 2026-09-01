@@ -56,7 +56,7 @@ android {
 
 chaquopy {
     defaultConfig {
-        version = "3.14"
+        version = "3.10"
         pip {
             install("pyXSteam")
         }
