@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">دوقلوی دیجیتال پلیتن سوپرهیتر</string>
+
+    <string name="nav_home">خانه</string>
+    <string name="nav_steady">پایا</string>
+    <string name="nav_transient">گذرا</string>
+    <string name="nav_burner">مشعل‌ها</string>
+    <string name="nav_history">تاریخچه</string>
+    <string name="menu_about">درباره</string>
+    <string name="menu_settings">تنظیمات</string>
+
+    <string name="label_flow">دبی بخار اصلی</string>
+    <string name="label_temp">دمای بخار اصلی</string>
+    <string name="label_press">فشار بخار اصلی</string>
+    <string name="label_spray">دبی پاشش مرحلهٔ اول</string>
+    <string name="label_lt_out">دمای خروجی سوپرهیتر دما-پایین</string>
+    <string name="label_q_platen">حرارت جذب‌شده در پلیتن</string>
+    <string name="label_htc">رابطهٔ انتقال حرارت</string>
+    <string name="label_duration">مدت شبیه‌سازی</string>
+    <string name="label_dt">گام زمانی</string>
+    <string name="label_initial_mode">شرایط اولیه</string>
+    <string name="label_metal_init">دمای اولیهٔ فلز</string>
+    <string name="label_q_init">شار حرارتی اولیه</string>
+    <string name="label_tau">ثابت زمانی τ</string>
+    <string name="label_t63">t63</string>
+    <string name="label_t95">t95</string>
+    <string name="label_regime">رژیم جریان</string>
+    <string name="label_outlet">خروجی پلیتن</string>
+    <string name="label_inlet">ورودی پلیتن</string>
+    <string name="label_metal">فلز</string>
+    <string name="label_spray_drop">افت دما با پاشش</string>
+    <string name="label_htc_value">ضریب انتقال حرارت</string>
+    <string name="label_heat_absorbed">حرارت جذب‌شده</string>
+
+    <string name="action_run">محاسبه</string>
+    <string name="action_save">ذخیرهٔ اجرا</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_export_csv">خروجی CSV</string>
+    <string name="action_export_png">خروجی PNG</string>
+    <string name="action_ignite_all">روشن‌کردن همه</string>
+    <string name="action_shut_all">خاموش‌کردن همه</string>
+    <string name="action_reset">بازنشانی</string>
+    <string name="action_connect">اتصال</string>
+    <string name="action_disconnect">قطع اتصال</string>
+
+    <string name="steady_title">پیش‌بینی پایا</string>
+    <string name="transient_title">شبیه‌سازی گذرا</string>
+    <string name="burner_title">شروع و توقف مشعل‌ها</string>
+    <string name="burner_front">دیوارهٔ جلو</string>
+    <string name="burner_rear">دیوارهٔ عقب</string>
+    <string name="burner_level">سطح</string>
+    <string name="burner_load">بار</string>
+    <string name="burner_ramp">زمان افزایش تدریجی</string>
+    <string name="burner_fired">حرارت مشعل‌ها</string>
+    <string name="burner_to_platen">حرارت گاز به پلیتن</string>
+
+    <string name="status_connected">زنده</string>
+    <string name="status_connecting">در حال اتصال…</string>
+    <string name="status_disconnected">قطع</string>
+
+    <string name="results_title">نتایج</string>
+    <string name="results_series">سری‌ها</string>
+    <string name="results_table">مقادیر</string>
+    <string name="results_warnings">هشدارها</string>
+    <string name="history_title">تاریخچه</string>
+    <string name="history_empty">هنوز اجرایی ذخیره نشده است.</string>
+
+    <string name="settings_title">تنظیمات</string>
+    <string name="settings_backend">نشانی سرور</string>
+    <string name="settings_htc">رابطهٔ پیش‌فرض</string>
+    <string name="settings_save">ذخیرهٔ تنظیمات</string>
+    <string name="settings_test">آزمایش اتصال</string>
+    <string name="settings_saved">تنظیمات ذخیره شد</string>
+    <string name="settings_test_ok">سرور در دسترس است</string>
+    <string name="settings_test_fail">سرور در دسترس نیست</string>
+
+    <string name="error_prefix">خطا</string>
+    <string name="loading">در حال محاسبه…</string>
+
+    <string name="about_title">دربارهٔ برنامه</string>
+    <string name="about_purpose">هدف برنامه</string>
+    <string name="about_purpose_text">این برنامه یک دوقلوی دیجیتال مهندسی برای پلیتن سوپرهیتر دیگ بخار یک نیروگاه ۳۲۵ مگاواتی با گردش طبیعی است. هدف آن پیش‌بینی دمای ورودی و خروجی بخار، دمای فلز و رفتار گذرای پلیتن در بهره‌برداری عادی و در هنگام روشن/خاموش کردن مشعل‌ها است.</string>
+
+    <string name="about_platen">پلیتن سوپرهیتر</string>
+    <string name="about_platen_text">پلیتن سوپرهیتر از ۴۳ پنل و ۴ لولهٔ مارپیچ موازی در هر پنل (در مجموع ۱۷۲ لوله) ساخته شده است. هر لوله ۸ گذر ۶ متری و طول توسعه‌یافتهٔ ۵۰ متر دارد. لوله‌ها ۵۷ میلی‌متر قطر خارجی و ۸ میلی‌متر ضخامت جدار با جنس 12Cr1MoV هستند. دو هدر به قطر خارجی ۴۰۰ میلی‌متر و طول ۱۶ متر، بخار را توزیع می‌کنند. جرم فلز حدود ۹۸٫۱ تن و ظرفیت حرارتی فلز حدود ۴۹٫۱ مگاژول بر کلوین است.</string>
+
+    <string name="about_modes">حالت پایا و گذرا</string>
+    <string name="about_modes_text">در حالت پایا، با استفاده از موازنهٔ آنتالپی و معادلهٔ حالت IAPWS-IF97، دمای ورودی و خروجی پلیتن، افت دمای ناشی از پاشش و ضریب انتقال حرارت محاسبه می‌شود. در حالت گذرا، پلیتن به‌صورت یک گرهٔ حرارتی یکپارچه (N = 1) مدل می‌شود؛ معادلهٔ بقای انرژی برای فلز و معادلهٔ شبه‌پایا برای بخار به‌صورت گام‌به‌گام حل می‌شود و ثابت زمانی، زمان نشست ۶۳ و ۹۵ درصد گزارش می‌گردد.</string>
+
+    <string name="about_units">واحدها</string>
+    <string name="about_units_text">همهٔ اعداد در تمام صفحه‌ها، پاسخ‌های سرور، محورهای نمودار و گزارش‌ها تنها با این واحدها نمایش داده می‌شوند: دبی جرمی بر حسب تن بر ساعت (t/h)، دما بر حسب درجهٔ سلسیوس (°C)، فشار بر حسب بار (bar)، توان حرارتی بر حسب مگاوات (MW) و ضریب انتقال حرارت بر حسب وات بر مترمربع-کلوین (W/m²K). واحدهای SI فقط در داخل حل‌کننده استفاده می‌شوند.</string>
+
+    <string name="about_formula">روابط حاکم</string>
+    <string name="about_formula_text">اختلاط پاشش: h_mix = (m_main·h_main + m_spray·h_spray) / (m_main + m_spray) و سپس T_platen_in از IAPWS-IF97 در فشار جاری به‌دست می‌آید. برای گرهٔ فلز: T_out = T_in + h·A·(T_m − T̄_s)/(m_dot·cp)، Q_conv = h·A·(T̄_s − T_m) و dT_m/dt = (Q_gas + Q_conv)/(M_m·C_m).</string>
+
+    <string name="about_htc">ضریب انتقال حرارت دینامیکی</string>
+    <string name="about_htc_text">در هر گام، خواص محلی IAPWS-IF97 (چگالی، گرمای ویژه، ویسکوزیته و رسانندگی حرارتی) محاسبه می‌شود. عدد رینولدز از Re = 4·m_dot_tube/(π·d_i·μ) و عدد پرانتل از Pr = μ·cp/k به‌دست می‌آید. برای جریان مغشوش دو رابطهٔ دیتوس-بولتر (Nu = 0.023·Re^0.8·Pr^0.4) و گنیلینسکی قابل انتخاب است و h = Nu·k/d_i محاسبه می‌شود.</string>
+
+    <string name="about_regimes">رژیم‌های جریان</string>
+    <string name="about_regimes_text">برای Re کمتر از ۲۳۰۰ جریان آرام است و Nu = 4.36 (شار حرارتی ثابت) در نظر گرفته می‌شود. برای Re بین ۲۳۰۰ و ۱۰۰۰۰ ناحیهٔ گذار است و Nu به‌صورت لگاریتمی-خطی میان مقادیر آرام و مغشوش درون‌یابی می‌شود. برای Re بزرگ‌تر یا مساوی ۱۰۰۰۰ جریان مغشوش است و رابطهٔ انتخابی کاربر به کار می‌رود.</string>
+
+    <string name="about_initial">حالت‌های شرایط اولیه</string>
+    <string name="about_initial_text">سه حالت وجود دارد: «دما» که در آن دمای فلز داده می‌شود و شار حرارتی سازگار از موازنهٔ انرژی پایا محاسبه می‌گردد؛ «شار حرارتی» که در آن شار داده می‌شود و دمای فلز به‌دست می‌آید؛ و «اجرای قبلی» که در آن وضعیت فلز از یک اجرای ذخیره‌شده بازیابی می‌شود. در همهٔ حالت‌ها شرط T_metal > T_steam و Q ≥ 0 بررسی می‌شود و در غیر این صورت پاسخ ۴۲۲ برگردانده می‌شود.</string>
+
+    <string name="about_burner">شروع و توقف گرافیکی مشعل‌ها</string>
+    <string name="about_burner_text">۲۴ مشعل گازسوز در سه سطح A، B و C (ارتفاع‌های ۹، ۱۲ و ۱۵ متر) و در دو ردیف جلو و عقب قرار دارند؛ هر مشعل ۴۰ مگاوات حرارتی دارد. با لمس هر مشعل، فرمان روشن یا خاموش با بار هدف و زمان افزایش تدریجی به شبیه‌سازی زندهٔ سرور فرستاده می‌شود. حرارت گاز رسیده به پلیتن برابر است با کسری از حرارت مشعل‌ها (q_platen_fraction، پیش‌فرض ۰٫۱۵) با تأخیر انتقال گاز (پیش‌فرض ۵ ثانیه).</string>
+
+    <string name="about_disclaimer">سلب مسئولیت</string>
+    <string name="about_disclaimer_text">این برنامه یک ابزار مهندسی برای تحلیل و آموزش است و جایگزین سیستم کنترل دیجیتال (DCS) نیروگاه، روش‌های استاندارد بهره‌برداری یا قضاوت مهندس مسئول نیست. تصمیم‌های عملیاتی باید بر پایهٔ داده‌های اندازه‌گیری‌شده و دستورالعمل‌های رسمی نیروگاه گرفته شود.</string>
+
+    <string name="about_version">نسخه و سازندگان</string>
+    <string name="about_version_text">نسخهٔ ۴٫۰٫۰ — بازنویسی کامل بر پایهٔ Kotlin و Jetpack Compose با هستهٔ محاسباتی Python/FastAPI و IAPWS-IF97. مدل حرارتی بر پایهٔ داده‌های طراحی پلیتن سوپرهیتر واحد ۳۲۵ مگاواتی و منابع معتبر انتقال حرارت جابه‌جایی تدوین شده است.</string>
+
+    <string name="about_contact">ارتباط</string>
+    <string name="about_contact_text">برای گزارش خطا، پیشنهاد یا درخواست کالیبراسیون، از بخش Issues مخزن GitHub پروژه استفاده کنید.</string>
+</resources>

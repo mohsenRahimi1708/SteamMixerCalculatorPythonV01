@@ -1,11 +1,13 @@
 pluginManagement {
     repositories {
-        mavenLocal()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
-        maven { url = uri("https://chaquo.com/maven") }
-        maven { url = uri("https://maven.aliyun.com/repository/google") }
-        maven { url = uri("https://maven.aliyun.com/repository/public") }
-        google()
         gradlePluginPortal()
     }
 }
@@ -13,14 +15,10 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        mavenLocal()
-        mavenCentral()
-        maven { url = uri("https://chaquo.com/maven") }
-        maven { url = uri("https://maven.aliyun.com/repository/google") }
-        maven { url = uri("https://maven.aliyun.com/repository/public") }
         google()
+        mavenCentral()
     }
 }
 
-rootProject.name = "SteamMixerV3"
+rootProject.name = "PlatenSuperheaterTwin"
 include(":app")

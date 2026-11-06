@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>chart</title>
+    <script src="echarts.min.js"></script>
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; background: #ffffff; }
+        #chart { width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+<div id="chart"></div>
+<script>
+    var chart = echarts.init(document.getElementById('chart'), null, { renderer: 'canvas' });
+    window.chartReady = true;
+
+    window.setOption = function (jsonText) {
+        try {
+            var option = typeof jsonText === 'string' ? JSON.parse(jsonText) : jsonText;
+            chart.setOption(option, true);
+            return 'ok';
+        } catch (e) {
+            return 'error: ' + e.message;
+        }
+    };
+
+    window.clearChart = function () {
+        chart.clear();
+    };
+
+    window.capturePng = function () {
+        return chart.getDataURL({ type: 'png', pixelRatio: 2, backgroundColor: '#ffffff' });
+    };
+
+    window.addEventListener('resize', function () { chart.resize(); });
+</script>
+</body>
+</html>
