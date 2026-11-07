@@ -1,4 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Steam Mixer V3</string>
+    <string name="app_name">Platen Twin</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_steady">Steady</string>
+    <string name="nav_transient">Transient</string>
+    <string name="nav_burner">Burners</string>
+    <string name="nav_history">History</string>
+    <string name="menu_about">About</string>
+    <string name="menu_settings">Settings</string>
+
+    <string name="home_title">Platen superheater</string>
+    <string name="home_subtitle">325 MW unit · 1000 t/h · 167 bar · 540 °C</string>
+    <string name="home_latest">Latest saved run</string>
+    <string name="home_no_runs">No saved runs yet. Run a steady-state prediction first.</string>
+    <string name="home_units_note">All values in t/h, °C, bar, MW and W/m²K.</string>
+    <string name="home_backend_state">Backend</string>
+
+    <string name="label_flow">Main steam flow</string>
+    <string name="label_temp">Main steam temperature</string>
+    <string name="label_press">Main steam pressure</string>
+    <string name="label_spray">First-stage spray flow</string>
+    <string name="label_lt_out">LT superheater outlet temperature</string>
+    <string name="label_q_platen">Platen heat absorption</string>
+    <string name="label_htc">Heat transfer correlation</string>
+    <string name="label_duration">Duration</string>
+    <string name="label_dt">Time step</string>
+    <string name="label_initial_mode">Initial condition</string>
+    <string name="label_metal_init">Initial metal temperature</string>
+    <string name="label_q_init">Initial heat input</string>
+    <string name="label_tau">Time constant τ</string>
+    <string name="label_t63">t63</string>
+    <string name="label_t95">t95</string>
+    <string name="label_regime">Flow regime</string>
+    <string name="label_outlet">Platen outlet</string>
+    <string name="label_inlet">Platen inlet</string>
+    <string name="label_metal">Metal</string>
+    <string name="label_spray_drop">Spray drop</string>
+    <string name="label_htc_value">Heat transfer coefficient</string>
+    <string name="label_heat_absorbed">Absorbed heat</string>
+
+    <string name="mode_temperature">temperature</string>
+    <string name="mode_heat_flux">heat_flux</string>
+    <string name="mode_previous_run">previous_run</string>
+
+    <string name="action_run">Run</string>
+    <string name="action_save">Save run</string>
+    <string name="action_saved">Saved</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_export_csv">Export CSV</string>
+    <string name="action_export_png">Export PNG</string>
+    <string name="action_close">Close</string>
+    <string name="action_apply">Apply</string>
+    <string name="action_ignite_all">Ignite all</string>
+    <string name="action_shut_all">Shut all</string>
+    <string name="action_reset">Reset</string>
+    <string name="action_connect">Connect</string>
+    <string name="action_disconnect">Disconnect</string>
+
+    <string name="steady_title">Steady-state prediction</string>
+    <string name="steady_hint">IF97 enthalpy balance across the platen with the tube-side heat transfer coefficient.</string>
+    <string name="transient_title">Transient run</string>
+    <string name="transient_hint">Single-node metal model with dynamic heat transfer coefficient.</string>
+    <string name="burner_title">Burner start / stop</string>
+    <string name="burner_hint">Tap a burner to ignite or shut it down. The live model answers within a few time constants.</string>
+    <string name="burner_front">Front wall</string>
+    <string name="burner_rear">Rear wall</string>
+    <string name="burner_level">Level</string>
+    <string name="burner_load">Load</string>
+    <string name="burner_ramp">Ramp time</string>
+    <string name="burner_edit">Burner setup</string>
+    <string name="burner_fired">Fired heat</string>
+    <string name="burner_to_platen">Gas heat to platen</string>
+
+    <string name="status_connected">Live</string>
+    <string name="status_connecting">Connecting…</string>
+    <string name="status_disconnected">Disconnected</string>
+
+    <string name="results_title">Results</string>
+    <string name="results_series">Series</string>
+    <string name="results_table">Values</string>
+    <string name="results_warnings">Warnings</string>
+    <string name="results_empty">No data</string>
+    <string name="results_chart_hint">Pinch to zoom, drag to pan, tap the legend to toggle a series.</string>
+
+    <string name="history_title">History</string>
+    <string name="history_empty">No saved runs yet.</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_backend">Backend URL</string>
+    <string name="settings_htc">Default correlation</string>
+    <string name="settings_defaults">Default parameters</string>
+    <string name="settings_save">Save settings</string>
+    <string name="settings_test">Test connection</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="settings_test_ok">Backend reachable</string>
+    <string name="settings_test_fail">Backend not reachable</string>
+    <string name="settings_hint">Use the plant server address, e.g. https://platen.plant.local/</string>
+
+    <string name="about_title">About / درباره</string>
+    <string name="about_purpose">Purpose</string>
+    <string name="about_platen">Platen superheater</string>
+    <string name="about_modes">Steady and transient modes</string>
+    <string name="about_units">Units</string>
+    <string name="about_formula">Governing equations</string>
+    <string name="about_htc">Dynamic heat transfer coefficient</string>
+    <string name="about_regimes">Flow regimes</string>
+    <string name="about_initial">Initial-condition modes</string>
+    <string name="about_burner">Graphical burner start / stop</string>
+    <string name="about_disclaimer">Disclaimer</string>
+    <string name="about_version">Version and credits</string>
+    <string name="about_contact">Contact</string>
+
+    <string name="unit_flow">t/h</string>
+    <string name="unit_temp">°C</string>
+    <string name="unit_press">bar</string>
+    <string name="unit_power">MW</string>
+    <string name="unit_htc">W/m²K</string>
+    <string name="unit_seconds">s</string>
+
+    <string name="series_t_out">Outlet T</string>
+    <string name="series_t_metal">Metal T</string>
+    <string name="series_q">Heat</string>
+    <string name="series_h">h</string>
+    <string name="series_re">Re</string>
+
+    <string name="error_prefix">Error</string>
+    <string name="loading">Computing…</string>
+    <string name="switch_burner_on">Ignite</string>
+    <string name="switch_burner_off">Shut down</string>
+
+    <!-- Persian About content, also mirrored here so the About screen
+         renders Persian regardless of the device locale. -->
+    <string name="about_purpose_text">این برنامه یک دوقلوی دیجیتال مهندسی برای پلیتن سوپرهیتر دیگ بخار یک نیروگاه ۳۲۵ مگاواتی با گردش طبیعی است. هدف آن پیش‌بینی دمای ورودی و خروجی بخار، دمای فلز و رفتار گذرای پلیتن در بهره‌برداری عادی و در هنگام روشن/خاموش کردن مشعل‌ها است.</string>
+    <string name="about_platen_text">پلیتن سوپرهیتر از ۴۳ پنل و ۴ لولهٔ مارپیچ موازی در هر پنل (در مجموع ۱۷۲ لوله) ساخته شده است. هر لوله ۸ گذر ۶ متری و طول توسعه‌یافتهٔ ۵۰ متر دارد. لوله‌ها ۵۷ میلی‌متر قطر خارجی و ۸ میلی‌متر ضخامت جدار با جنس 12Cr1MoV هستند. دو هدر به قطر خارجی ۴۰۰ میلی‌متر و طول ۱۶ متر، بخار را توزیع می‌کنند. جرم فلز حدود ۹۸٫۱ تن و ظرفیت حرارتی فلز حدود ۴۹٫۱ مگاژول بر کلوین است.</string>
+    <string name="about_modes_text">در حالت پایا، با استفاده از موازنهٔ آنتالپی و معادلهٔ حالت IAPWS-IF97، دمای ورودی و خروجی پلیتن، افت دمای ناشی از پاشش و ضریب انتقال حرارت محاسبه می‌شود. در حالت گذرا، پلیتن به‌صورت یک گرهٔ حرارتی یکپارچه (N = 1) مدل می‌شود؛ معادلهٔ بقای انرژی برای فلز و معادلهٔ شبه‌پایا برای بخار به‌صورت گام‌به‌گام حل می‌شود و ثابت زمانی، زمان نشست ۶۳ و ۹۵ درصد گزارش می‌گردد.</string>
+    <string name="about_units_text">همهٔ اعداد در تمام صفحه‌ها، پاسخ‌های سرور، محورهای نمودار و گزارش‌ها تنها با این واحدها نمایش داده می‌شوند: دبی جرمی بر حسب تن بر ساعت (t/h)، دما بر حسب درجهٔ سلسیوس (°C)، فشار بر حسب بار (bar)، توان حرارتی بر حسب مگاوات (MW) و ضریب انتقال حرارت بر حسب وات بر مترمربع-کلوین (W/m²K). واحدهای SI فقط در داخل حل‌کننده استفاده می‌شوند.</string>
+    <string name="about_formula_text">اختلاط پاشش: h_mix = (m_main·h_main + m_spray·h_spray) / (m_main + m_spray) و سپس T_platen_in از IAPWS-IF97 در فشار جاری به‌دست می‌آید. برای گرهٔ فلز: T_out = T_in + h·A·(T_m − T̄_s)/(m_dot·cp)، Q_conv = h·A·(T̄_s − T_m) و dT_m/dt = (Q_gas + Q_conv)/(M_m·C_m).</string>
+    <string name="about_htc_text">در هر گام، خواص محلی IAPWS-IF97 (چگالی، گرمای ویژه، ویسکوزیته و رسانندگی حرارتی) محاسبه می‌شود. عدد رینولدز از Re = 4·m_dot_tube/(π·d_i·μ) و عدد پرانتل از Pr = μ·cp/k به‌دست می‌آید. برای جریان مغشوش دو رابطهٔ دیتوس-بولتر (Nu = 0.023·Re^0.8·Pr^0.4) و گنیلینسکی قابل انتخاب است و h = Nu·k/d_i محاسبه می‌شود.</string>
+    <string name="about_regimes_text">برای Re کمتر از ۲۳۰۰ جریان آرام است و Nu = 4.36 (شار حرارتی ثابت) در نظر گرفته می‌شود. برای Re بین ۲۳۰۰ و ۱۰۰۰۰ ناحیهٔ گذار است و Nu به‌صورت لگاریتمی-خطی میان مقادیر آرام و مغشوش درون‌یابی می‌شود. برای Re بزرگ‌تر یا مساوی ۱۰۰۰۰ جریان مغشوش است و رابطهٔ انتخابی کاربر به کار می‌رود.</string>
+    <string name="about_initial_text">سه حالت وجود دارد: «دما» که در آن دمای فلز داده می‌شود و شار حرارتی سازگار از موازنهٔ انرژی پایا محاسبه می‌گردد؛ «شار حرارتی» که در آن شار داده می‌شود و دمای فلز به‌دست می‌آید؛ و «اجرای قبلی» که در آن وضعیت فلز از یک اجرای ذخیره‌شده بازیابی می‌شود. در همهٔ حالت‌ها شرط T_metal > T_steam و Q ≥ 0 بررسی می‌شود و در غیر این صورت پاسخ ۴۲۲ برگردانده می‌شود.</string>
+    <string name="about_burner_text">۲۴ مشعل گازسوز در سه سطح A، B و C (ارتفاع‌های ۹، ۱۲ و ۱۵ متر) و در دو ردیف جلو و عقب قرار دارند؛ هر مشعل ۴۰ مگاوات حرارتی دارد. با لمس هر مشعل، فرمان روشن یا خاموش با بار هدف و زمان افزایش تدریجی به شبیه‌سازی زندهٔ سرور فرستاده می‌شود. حرارت گاز رسیده به پلیتن برابر است با کسری از حرارت مشعل‌ها (q_platen_fraction، پیش‌فرض ۰٫۱۵) با تأخیر انتقال گاز (پیش‌فرض ۵ ثانیه).</string>
+    <string name="about_disclaimer_text">این برنامه یک ابزار مهندسی برای تحلیل و آموزش است و جایگزین سیستم کنترل دیجیتال (DCS) نیروگاه، روش‌های استاندارد بهره‌برداری یا قضاوت مهندس مسئول نیست. تصمیم‌های عملیاتی باید بر پایهٔ داده‌های اندازه‌گیری‌شده و دستورالعمل‌های رسمی نیروگاه گرفته شود.</string>
+    <string name="about_version_text">نسخهٔ ۴٫۰٫۰ — بازنویسی کامل بر پایهٔ Kotlin و Jetpack Compose با هستهٔ محاسباتی Python/FastAPI و IAPWS-IF97. مدل حرارتی بر پایهٔ داده‌های طراحی پلیتن سوپرهیتر واحد ۳۲۵ مگاواتی و منابع معتبر انتقال حرارت جابه‌جایی تدوین شده است.</string>
+    <string name="about_contact_text">برای گزارش خطا، پیشنهاد یا درخواست کالیبراسیون، از بخش Issues مخزن GitHub پروژه استفاده کنید.</string>
 </resources>
