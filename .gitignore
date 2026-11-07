@@ -21,3 +21,5 @@ build.log
 /dist
 /backend/data
 *.db
+unit.log
+*.log
