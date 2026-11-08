@@ -29,6 +29,11 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
 
     async def dispatch(self, request: Request, call_next):
         path = request.url.path
+        # Only API traffic is throttled: the HMI shell, its assets and the
+        # WebSocket upgrades must stay reachable even when a UI tab is reloaded
+        # repeatedly or several clients share one address.
+        if not path.startswith("/api/"):
+            return await call_next(request)
         if any(path.startswith(prefix) for prefix in self.EXEMPT_PREFIXES):
             return await call_next(request)
         client = request.client.host if request.client else "unknown"

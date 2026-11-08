@@ -40,7 +40,9 @@ def get_run(run_id: str, store: RunStore = Depends(get_store)) -> dict:
     return record.detail()
 
 
-@router.delete("/api/runs/{run_id}", status_code=204, summary="Delete a stored run")
+@router.delete(
+    "/api/runs/{run_id}", status_code=204, response_model=None, summary="Delete a stored run"
+)
 def delete_run(run_id: str, store: RunStore = Depends(get_store)) -> None:
     """Remove one stored run."""
     if not store.delete(run_id):

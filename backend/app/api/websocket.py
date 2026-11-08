@@ -83,7 +83,9 @@ async def ws_transient(websocket: WebSocket) -> None:
         except RuntimeError:
             stop.set()
 
-    listener = asyncio.create_task(listen())
+    # Read the start frame before starting the listener: two concurrent
+    # receive_json() calls would race for the first message and stall the stream.
+    listener: asyncio.Task | None = None
     try:
         raw = await websocket.receive_json()
         try:
@@ -92,6 +94,7 @@ async def ws_transient(websocket: WebSocket) -> None:
             await _send_error(websocket, "validation_error", str(exc))
             return
         request: TransientRequest = start.request
+        listener = asyncio.create_task(listen())
         initial_state = resolve_initial_state(request, store)
         result = await asyncio.to_thread(
             solve_transient,
@@ -139,9 +142,10 @@ async def ws_transient(websocket: WebSocket) -> None:
         with contextlib.suppress(RuntimeError):
             await _send_error(websocket, exc.code, exc.message_en, {"detail": exc.to_payload()})
     finally:
-        listener.cancel()
-        with contextlib.suppress(asyncio.CancelledError):
-            await listener
+        if listener is not None:
+            listener.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await listener
         with contextlib.suppress(RuntimeError):
             await websocket.close()
 

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platen Superheater Digital Twin</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23070b12'/><path d='M18 46V18M26 46V18M34 46V18M42 46V18' stroke='%2322d3ee' stroke-width='4'/></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M7 26V6M12 26V6M17 26V6M22 26V6" stroke="currentColor" stroke-width="2.4" fill="none"/>
+      <path d="M25 12h3M25 20h3" stroke="currentColor" stroke-width="2.4"/>
+    </svg>
+    <div>
+      <h1>Platen Superheater <span>Digital Twin</span></h1>
+      <p class="sub">325 MW natural-circulation boiler · IAPWS-IF97 · t/h · °C · bar · MW · W/m²K</p>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span id="health" class="chip chip-muted">connecting…</span>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="transient">Transient</button>
+      <button class="tab" data-tab="steady">Steady state</button>
+      <button class="tab" data-tab="burners">Burners</button>
+      <button class="tab" data-tab="about">درباره</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= TRANSIENT ================= -->
+<section class="view active" id="view-transient">
+  <div class="layout">
+    <aside class="panel">
+      <h2>Operating point</h2>
+      <div id="op-transient" class="op-form"></div>
+
+      <h2 class="mt">Simulation</h2>
+      <label>Scenario
+        <select id="tr-scenario">
+          <option value="ten_burners" selected>Ignite 10 burners (≈ 60 MW to platen)</option>
+          <option value="four_burners">Ignite 4 burners (≈ 24 MW to platen)</option>
+          <option value="cold_start">Cold start A → B → C (full firing)</option>
+          <option value="all_off">Shut all burners at t = 0</option>
+          <option value="none">Hold steady state (no burner change)</option>
+        </select>
+      </label>
+      <div class="grid2">
+        <label>Duration <span class="unit">s</span>
+          <input type="number" id="tr-duration" value="600" min="10" max="7200" step="10">
+        </label>
+        <label>Time step <span class="unit">s</span>
+          <input type="number" id="tr-dt" value="2" min="0.5" max="60" step="0.5">
+        </label>
+      </div>
+      <label>Initial condition
+        <select id="tr-mode">
+          <option value="temperature">Metal temperature (back-solve heat input)</option>
+          <option value="heat_flux">Heat input (back-solve metal temperature)</option>
+          <option value="previous_run">Previous run (latest stored)</option>
+        </select>
+      </label>
+      <label id="tr-tmetal-wrap">Initial metal temperature <span class="unit">°C</span>
+        <input type="number" id="tr-tmetal" value="560" min="0" max="900" step="1">
+      </label>
+      <label id="tr-q-wrap" class="hidden">Initial heat input <span class="unit">MW</span>
+        <input type="number" id="tr-q" value="60" min="0" max="600" step="1">
+      </label>
+
+      <div class="actions">
+        <button id="tr-run" class="btn primary">Run simulation</button>
+        <button id="tr-csv" class="btn ghost" disabled>CSV</button>
+      </div>
+      <p id="tr-status" class="status">Ready.</p>
+    </aside>
+
+    <div class="panel chart-panel">
+      <div class="kpis" id="tr-kpis">
+        <div class="kpi"><span>Outlet</span><strong id="k-tout">—</strong><em>°C</em></div>
+        <div class="kpi"><span>Metal</span><strong id="k-tmetal">—</strong><em>°C</em></div>
+        <div class="kpi"><span>τ</span><strong id="k-tau">—</strong><em>s</em></div>
+        <div class="kpi"><span>t63</span><strong id="k-t63">—</strong><em>s</em></div>
+        <div class="kpi"><span>t95</span><strong id="k-t95">—</strong><em>s</em></div>
+        <div class="kpi"><span>h</span><strong id="k-h">—</strong><em>W/m²K</em></div>
+      </div>
+
+      <div class="chart-toolbar">
+        <span class="hint">Drag to zoom · wheel to zoom · click legend to combine series</span>
+        <span id="tr-regime" class="chip chip-muted">—</span>
+      </div>
+      <div id="transient-chart" class="chart tall"></div>
+      <div id="tr-warnings" class="warnings"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEADY ================= -->
+<section class="view" id="view-steady">
+  <div class="layout">
+    <aside class="panel">
+      <h2>Operating point</h2>
+      <div id="op-steady" class="op-form"></div>
+      <div class="actions">
+        <button id="ss-run" class="btn primary">Calculate</button>
+      </div>
+      <p id="ss-status" class="status">Ready.</p>
+      <div class="note">
+        <b>IF97 chain</b>
+        <p>h<sub>main</sub> = h(P, T<sub>main</sub>); h<sub>mix</sub> = (ṁ<sub>main</sub>h<sub>main</sub> + ṁ<sub>spray</sub>h<sub>f</sub>) / ṁ<sub>total</sub>; T<sub>out</sub> = T(P, h<sub>mix</sub> + Q/ṁ<sub>total</sub>).</p>
+      </div>
+    </aside>
+
+    <div class="panel chart-panel">
+      <div class="kpis" id="ss-kpis">
+        <div class="kpi"><span>Platen inlet</span><strong id="s-tin">—</strong><em>°C</em></div>
+        <div class="kpi"><span>Platen outlet</span><strong id="s-tout">—</strong><em>°C</em></div>
+        <div class="kpi"><span>Spray drop</span><strong id="s-drop">—</strong><em>°C</em></div>
+        <div class="kpi"><span>Absorbed heat</span><strong id="s-q">—</strong><em>MW</em></div>
+        <div class="kpi"><span>Re</span><strong id="s-re">—</strong><em>–</em></div>
+        <div class="kpi"><span>h</span><strong id="s-h">—</strong><em>W/m²K</em></div>
+      </div>
+      <div class="chart-toolbar">
+        <span class="hint">Nusselt correlations at the same operating point</span>
+        <span id="s-regime" class="chip chip-muted">—</span>
+      </div>
+      <div id="steady-chart" class="chart"></div>
+      <div id="ss-detail" class="detail-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BURNERS ================= -->
+<section class="view" id="view-burners">
+  <div class="layout">
+    <aside class="panel">
+      <h2>Live session</h2>
+      <label>Initial metal temperature <span class="unit">°C</span>
+        <input type="number" id="bn-tmetal" value="560" min="0" max="900" step="1">
+      </label>
+      <div class="grid2">
+        <label>Platen heat fraction <span class="unit">–</span>
+          <input type="number" id="bn-fraction" value="0.15" min="0" max="1" step="0.01">
+        </label>
+        <label>Gas lag <span class="unit">s</span>
+          <input type="number" id="bn-lag" value="5" min="0" max="120" step="1">
+        </label>
+      </div>
+      <label>Speed
+        <select id="bn-speed">
+          <option value="1">1× real time</option>
+          <option value="5" selected>5×</option>
+          <option value="20">20×</option>
+          <option value="60">60×</option>
+        </select>
+      </label>
+      <div class="actions">
+        <button id="bn-start" class="btn primary">Start live</button>
+        <button id="bn-stop" class="btn ghost" disabled>Stop</button>
+      </div>
+      <p id="bn-status" class="status">Session idle.</p>
+
+      <h2 class="mt">Presets</h2>
+      <div class="preset-row">
+        <button class="btn tiny" data-preset="all_on">All ON</button>
+        <button class="btn tiny" data-preset="all_off">All OFF</button>
+        <button class="btn tiny" data-preset="level_a">Level A</button>
+        <button class="btn tiny" data-preset="cold_start">Cold start</button>
+      </div>
+
+      <h2 class="mt">Event log</h2>
+      <ul id="bn-log" class="log"><li class="muted">No events yet.</li></ul>
+    </aside>
+
+    <div class="panel chart-panel">
+      <div class="burner-legend">
+        <span><i class="dot on"></i> firing</span>
+        <span><i class="dot off"></i> off</span>
+        <span class="muted">tap a burner to ignite / shut it</span>
+        <span id="bn-count" class="chip chip-muted">0 / 24 firing</span>
+      </div>
+      <div id="burner-grid" class="burner-grid"></div>
+
+      <div class="kpis">
+        <div class="kpi"><span>Outlet</span><strong id="b-tout">—</strong><em>°C</em></div>
+        <div class="kpi"><span>Metal</span><strong id="b-tmetal">—</strong><em>°C</em></div>
+        <div class="kpi"><span>Fired</span><strong id="b-qburn">—</strong><em>MW</em></div>
+        <div class="kpi"><span>Gas to platen</span><strong id="b-qgas">—</strong><em>MW</em></div>
+        <div class="kpi"><span>h</span><strong id="b-h">—</strong><em>W/m²K</em></div>
+        <div class="kpi"><span>Sim time</span><strong id="b-time">0</strong><em>s</em></div>
+      </div>
+      <div id="burner-chart" class="chart"></div>
+      <div id="bn-warnings" class="warnings"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT (PERSIAN, RTL) ================= -->
+<section class="view" id="view-about">
+  <div class="panel about" dir="rtl" lang="fa">
+    <h2>دربارهٔ دوقلوی دیجیتال پلیتن سوپرهیتر</h2>
+    <p class="version">نسخهٔ ۴٫۰٫۰ — رابط وب تعاملی</p>
+
+    <h3>هدف برنامه</h3>
+    <p>این برنامه دماهای ورودی و خروجی بخار پلیتن سوپرهیتر یک دیگ بخار ۳۲۵ مگاواتی با گردش طبیعی را در سه حالت پایا، گذرا و شروع/توقف گرافیکی مشعل‌ها پیش‌بینی می‌کند. هدف، مشاهدهٔ پاسخ دینامیکی دما نسبت به تغییر بار و آتش‌گیری مشعل‌ها پیش از اعمال آن در نیروگاه است.</p>
+
+    <h3>پلیتن سوپرهیتر</h3>
+    <p>۴۳ پنل و ۴ لوله در هر پنل (۱۷۲ لوله)، لولهٔ ۵۷×۸ میلی‌متر از جنس 12Cr1MoV با طول توسعه‌یافتهٔ ۵۰ متر، دو هدر ۴۰۰×۵۵ میلی‌متر، سطح داخلی حدود ۱۱۰۸ مترمربع، جرم فلز حدود ۹۸٫۱ تن و ظرفیت حرارتی فلز حدود ۴۹٫۱ مگاژول بر کلوین.</p>
+
+    <h3>حالت پایا</h3>
+    <p>اختلاط بخار اصلی با آب پاشش مرحلهٔ اول به‌صورت آدیاباتیک محاسبه و دمای خروجی با IAPWS-IF97 به‌دست می‌آید. ضریب انتقال حرارت نیز از خواص محلی بخار محاسبه می‌شود.</p>
+
+    <h3>حالت گذرا</h3>
+    <p>مدل تک‌گرهی فلز با موازنهٔ انرژی:</p>
+    <pre>T_out = T_in + h·A·(T_m − T̄_s)/(ṁ·cp)
+dT_m/dt = (Q_gas + h·A·(T̄_s − T_m))/(M_m·C_m)</pre>
+    <p>گام زمانی به‌صورت داخلی کوچک می‌شود تا شرط پایداری <span dir="ltr">dt ≤ 0.5·M_m·C_m/(h·A)</span> برقرار بماند. ثابت زمانی، t63 و t95 گزارش می‌شوند.</p>
+
+    <h3>سه حالت شرط اولیه</h3>
+    <ul>
+      <li><b>دمای فلز:</b> کاربر دمای فلز را می‌دهد و گرمای اولیه از موازنهٔ پایا پس‌محاسبه می‌شود.</li>
+      <li><b>شار حرارتی:</b> کاربر گرمای اولیه را می‌دهد و دمای فلز پس‌محاسبه می‌شود.</li>
+      <li><b>اجرای قبلی:</b> وضعیت از آخرین اجرای ذخیره‌شده بارگذاری می‌شود.</li>
+    </ul>
+
+    <h3>ضریب انتقال حرارت دینامیکی</h3>
+    <p>در هر گام، خواص IF97 و سپس:</p>
+    <pre dir="ltr">Re = 4·ṁ_tube/(π·d_i·μ)   Pr = μ·cp/k
+Re &lt; 2300 → laminar, Nu = 4.36
+2300 ≤ Re &lt; 10000 → transition (log-linear)
+Re ≥ 10000 → Dittus–Boelter or Gnielinski
+h = Nu·k/d_i</pre>
+
+    <h3>شروع/توقف گرافیکی مشعل‌ها</h3>
+    <p>۲۴ مشعل ۴۰ مگاواتی در سه سطح ۹، ۱۲ و ۱۵ متر و دو ردیف جلو و عقب. با کلیک روی هر مشعل، فرمان روشن/خاموش به شبیه‌سازی زنده فرستاده می‌شود و منحنی‌های دما در همان لحظه تغییر می‌کنند.</p>
+    <pre dir="ltr">Q_burners(t) = Σ 40 MW · load_i(t)
+Q_gas(t) = q_platen_fraction · Q_burners(t − gas_lag)</pre>
+
+    <h3>واحدها</h3>
+    <p>همهٔ اعداد در این رابط با واحدهای تن بر ساعت (t/h)، درجهٔ سلسیوس (°C)، بار (bar)، مگاوات (MW) و وات بر مترمربع-کلوین (W/m²K) نمایش داده می‌شوند. واحدهای SI فقط درون حل‌کننده به‌کار می‌روند.</p>
+
+    <h3>سلب مسئولیت</h3>
+    <p>این برنامه یک ابزار مهندسی و آموزشی است و جایگزین سیستم کنترل دیجیتال نیروگاه، دستورالعمل‌های رسمی بهره‌برداری یا قضاوت مهندس مسئول نیست.</p>
+
+    <h3>مشخصات فنی</h3>
+    <div id="about-geometry" class="detail-grid"></div>
+  </div>
+</section>
+
+</main>
+
+<script src="/vendor/echarts.min.js"></script>
+<script src="/app.js" defer></script>
+</body>
+</html>

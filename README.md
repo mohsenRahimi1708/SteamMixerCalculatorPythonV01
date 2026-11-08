@@ -14,6 +14,39 @@ the WebSocket streams and every client.
 
 ---
 
+## Web HMI (open in any browser)
+
+The same FastAPI service also ships a browser interface, so the model can be
+used from a control-room workstation without installing anything:
+
+```
+http://<plant-server>:8000/          # served by the backend itself
+```
+
+* **Transient** — the main workspace. Pick an operating point and a scenario
+  (ignite 4 / 10 burners, cold start A→B→C, shut all burners, or hold steady
+  state), run it, and read the response curves: outlet, metal and inlet
+  temperature on °C, gas heat and heat-transfer coefficient on the second axis.
+  Zoom with the wheel, drag to pan, click a legend entry to isolate or combine
+  series, and the chart marks t63 and t95. CSV export of the full series.
+* **Steady state** — IF97 prediction plus a Nusselt comparison
+  (selected / Dittus–Boelter / Gnielinski) and the dimensionless diagnostics.
+* **Burners** — the interactive 24-burner grid (3 levels × front/rear × 4).
+  Start a live WSS session, tap any burner to ignite or shut it, and watch
+  `T_out`, `T_metal`, `Q_burners` and `Q_gas` respond in real time; presets
+  ignite all burners, a level, or a staged cold start.
+* **درباره** — the Persian, right-to-left About screen with the formulas,
+  regimes, initial-condition modes and the disclaimer.
+
+The page is plain HTML/CSS/JS with a bundled ECharts build and the Vazirmatn
+font, so it works on an isolated plant network with no CDN access. It is served
+by `StaticFiles` from `backend/app/web/`, and the API documentation stays at
+`/docs`.
+
+![Transient response curves](docs/screenshots/web-transient.png)
+
+---
+
 ## 1. Version and branch
 
 | Item | Value |
@@ -231,7 +264,7 @@ Localised error messages are taken from the backend payload.
 ## 6. Tests
 
 ```bash
-# backend, 76 tests
+# backend, 80 tests (76 model/API + 4 web HMI)
 cd backend && pip install -r requirements.txt && PYTHONPATH=. pytest -q
 
 # android unit tests

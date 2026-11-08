@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app import APP_VERSION
 from app.api import (
@@ -127,6 +129,11 @@ def create_app() -> FastAPI:
     def saturation(P_bar: float) -> dict:
         """Saturation temperature at a pressure."""
         return {"P_bar": P_bar, "T_sat_C": if97.tsat_p(P_bar), "h_f_kJ_kg": if97.sat_liquid_h(P_bar)}
+
+    # The browser HMI is mounted last so every API route and /docs keep priority.
+    web_dir = Path(__file__).resolve().parent / "web"
+    if web_dir.is_dir():
+        app.mount("/", StaticFiles(directory=web_dir, html=True), name="web")
 
     return app
 
